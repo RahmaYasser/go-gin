@@ -16,7 +16,7 @@ var (
 
 func setLoggingOutput() {
 	file, _ := os.Create("log")
-	gin.DefaultWriter = io.MultiWriter(file)
+	gin.DefaultWriter = io.MultiWriter(file, os.Stdout)
 }
 func main() {
 	setLoggingOutput()
