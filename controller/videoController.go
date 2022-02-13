@@ -11,6 +11,7 @@ import (
 type VideoController interface {
 	Save(ctx *gin.Context) error
 	FindAll() []entity.Video
+	ShowAll(ctx *gin.Context)
 }
 
 type videoController struct {
@@ -41,4 +42,12 @@ func (controller *videoController) Save(ctx *gin.Context) error {
 }
 func (controller *videoController) FindAll() []entity.Video {
 	return controller.service.FindAll()
+}
+func (controller *videoController) ShowAll(ctx *gin.Context) {
+	videos := controller.service.FindAll()
+	data := gin.H{
+		"title":  "video page",
+		"videos": videos,
+	}
+	ctx.HTML(200, "index.html", data)
 }

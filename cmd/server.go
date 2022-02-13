@@ -23,19 +23,30 @@ func main() {
 	setLoggingOutput()
 	server := gin.New()
 	server.Use(gin.Recovery(), middleware.Logger(), middleware.BasicAuth(), gindump.Dump())
-	server.GET("/videos", func(context *gin.Context) {
-		context.JSON(200, videoController.FindAll())
-	})
-	server.POST("/videos", func(context *gin.Context) {
 
-		err := videoController.Save(context)
-		if err != nil {
-			context.JSON(400, gin.H{"error": err.Error()})
-			return
-		}
-		context.JSON(200, gin.H{
-			"message": "ok",
+	server.Static("/css", "./template/css")
+	server.LoadHTMLGlob("templates/*.html")
+
+	apiRoutes := server.Group("/api")
+	{
+		apiRoutes.GET("/videos", func(context *gin.Context) {
+			context.JSON(200, videoController.FindAll())
 		})
-	})
+		apiRoutes.POST("/videos", func(context *gin.Context) {
+
+			err := videoController.Save(context)
+			if err != nil {
+				context.JSON(400, gin.H{"error": err.Error()})
+				return
+			}
+			context.JSON(200, gin.H{
+				"message": "ok",
+			})
+		})
+	}
+	viewRoutes := server.Group("/view")
+	{
+		viewRoutes.GET("/videos", videoController.ShowAll)
+	}
 	server.Run("localhost:8080")
 }
