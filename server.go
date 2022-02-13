@@ -5,6 +5,8 @@ import (
 	"github.com/RahmaYasser/go-gin/middleware"
 	"github.com/RahmaYasser/go-gin/service"
 	"github.com/gin-gonic/gin"
+	"io"
+	"os"
 )
 
 var (
@@ -12,7 +14,12 @@ var (
 	videoController controller.VideoController = controller.New(videoService)
 )
 
+func setLoggingOutput() {
+	file, _ := os.Create("log")
+	gin.DefaultWriter = io.MultiWriter(file)
+}
 func main() {
+	setLoggingOutput()
 	server := gin.New()
 	server.Use(gin.Recovery(), middleware.Logger())
 	server.GET("/videos", func(context *gin.Context) {
