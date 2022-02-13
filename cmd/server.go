@@ -21,7 +21,7 @@ func setLoggingOutput() {
 func main() {
 	setLoggingOutput()
 	server := gin.New()
-	server.Use(gin.Recovery(), middleware.Logger())
+	server.Use(gin.Recovery(), middleware.Logger(), middleware.BasicAuth())
 	server.GET("/videos", func(context *gin.Context) {
 		context.JSON(200, videoController.FindAll())
 	})

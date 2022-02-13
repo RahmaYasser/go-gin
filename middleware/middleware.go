@@ -17,3 +17,7 @@ func Logger() gin.HandlerFunc {
 		)
 	})
 }
+
+func BasicAuth() gin.HandlerFunc {
+	return gin.BasicAuth(gin.Accounts{"usr": "21134"})
+}
