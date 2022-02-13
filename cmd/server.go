@@ -27,7 +27,15 @@ func main() {
 		context.JSON(200, videoController.FindAll())
 	})
 	server.POST("/videos", func(context *gin.Context) {
-		context.JSON(200, videoController.Save(context))
+
+		err := videoController.Save(context)
+		if err != nil {
+			context.JSON(400, gin.H{"error": err.Error()})
+			return
+		}
+		context.JSON(200, gin.H{
+			"message": "ok",
+		})
 	})
 	server.Run("localhost:8080")
 }
