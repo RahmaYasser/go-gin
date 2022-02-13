@@ -2,11 +2,24 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] GET    /videos                   --> main.main.func1 (5 handlers)
-[GIN-debug] POST   /videos                   --> main.main.func2 (5 handlers)
+[GIN-debug] GET    /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (5 handlers)
+[GIN-debug] HEAD   /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (5 handlers)
+[GIN-debug] Loaded HTML Templates (4): 
+	- 
+	- footer.html
+	- header.html
+	- index.html
+
+[GIN-debug] GET    /api/videos               --> main.main.func1 (5 handlers)
+[GIN-debug] POST   /api/videos               --> main.main.func2 (5 handlers)
+[GIN-debug] GET    /view/videos              --> github.com/RahmaYasser/go-gin/controller.VideoController.ShowAll-fm (5 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
-[GIN-debug] Listening and serving HTTP on localhost:8080
- 127.0.0.1 [2022-02-13 20:09:39.492884698 +0200 EET m=+4.069553069] POST /videos 400 528.472µs
- 127.0.0.1 [2022-02-13 20:09:48.158154908 +0200 EET m=+12.734823375] POST /videos 400 908.79µs
- 127.0.0.1 [2022-02-13 20:09:59.679770428 +0200 EET m=+24.256438829] POST /videos 200 582.619µs
+[GIN-debug] Listening and serving HTTP on localhost:8081
+ 127.0.0.1 [2022-02-13 21:10:08.667476602 +0200 EET m=+2.892610703] POST /api/videos 200 1.209078ms
+ 127.0.0.1 [2022-02-13 21:10:17.877035572 +0200 EET m=+12.102169683] GET /view/videos 200 564.021µs
+ 127.0.0.1 [2022-02-13 21:10:17.923432127 +0200 EET m=+12.148566226] GET /css/index.css 404 210.803µs
+ 127.0.0.1 [2022-02-13 21:10:49.265760879 +0200 EET m=+43.490894990] POST /api/videos 200 340.057µs
+ 127.0.0.1 [2022-02-13 21:11:19.281807954 +0200 EET m=+73.506942050] POST /api/videos 200 203.628µs
+ 127.0.0.1 [2022-02-13 21:11:23.96976268 +0200 EET m=+78.194896781] GET /view/videos 200 477.891µs
+ 127.0.0.1 [2022-02-13 21:11:24.016670987 +0200 EET m=+78.241805094] GET /css/index.css 404 247.177µs

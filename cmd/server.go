@@ -48,5 +48,5 @@ func main() {
 	{
 		viewRoutes.GET("/videos", videoController.ShowAll)
 	}
-	server.Run("localhost:8080")
+	server.Run("localhost:8081")
 }
