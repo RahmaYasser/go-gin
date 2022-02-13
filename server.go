@@ -13,8 +13,11 @@ var (
 
 func main() {
 	server := gin.Default()
-	server.GET("/posts", func(context *gin.Context) {
+	server.GET("/videos", func(context *gin.Context) {
 		context.JSON(200, videoController.FindAll())
+	})
+	server.POST("/videos", func(context *gin.Context) {
+		context.JSON(200, videoController.Save(context))
 	})
 	server.Run("localhost:8080")
 }
