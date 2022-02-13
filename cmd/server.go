@@ -5,6 +5,7 @@ import (
 	"github.com/RahmaYasser/go-gin/middleware"
 	"github.com/RahmaYasser/go-gin/service"
 	"github.com/gin-gonic/gin"
+	gindump "github.com/tpkeeper/gin-dump"
 	"io"
 	"os"
 )
@@ -21,7 +22,7 @@ func setLoggingOutput() {
 func main() {
 	setLoggingOutput()
 	server := gin.New()
-	server.Use(gin.Recovery(), middleware.Logger(), middleware.BasicAuth())
+	server.Use(gin.Recovery(), middleware.Logger(), middleware.BasicAuth(), gindump.Dump())
 	server.GET("/videos", func(context *gin.Context) {
 		context.JSON(200, videoController.FindAll())
 	})
