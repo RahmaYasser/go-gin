@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/RahmaYasser/go-gin/middleware"
 	"net/http"
 	"os"
 
@@ -41,7 +42,7 @@ func main() {
 	})
 
 	// JWT Authorization Middleware applies to "/api" only.
-	apiRoutes := server.Group("/api", middlewares.AuthorizeJWT())
+	apiRoutes := server.Group("/api", middleware.AuthorizeJWT())
 	{
 		apiRoutes.GET("/videos", func(ctx *gin.Context) {
 			ctx.JSON(200, videoController.FindAll())
